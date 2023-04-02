@@ -1,11 +1,15 @@
 package game;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
 
-public class GamePanel extends JPanel implements ActionListener {
+public class GamePanel extends Pieces implements ActionListener {
 
     static final int SCREEN_WIDTH = 800;
     static final int SCREEN_HEIGHT = 800;
@@ -22,15 +26,17 @@ public class GamePanel extends JPanel implements ActionListener {
         startGame();
     }
     public void startGame() {
-
+        uploadImages();
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
 
     }
+
     public void draw(Graphics g) {
-    /*board drawing*/for(int i=0 ; i<SCREEN_WIDTH/FIELD_SIZE; i+=2){
+        /*board drawing*/
+        for(int i=0 ; i<SCREEN_WIDTH/FIELD_SIZE; i+=2){
 
                 g.setColor(Color.GRAY);
 
@@ -58,6 +64,23 @@ public class GamePanel extends JPanel implements ActionListener {
                 g.drawRect((i+1)*FIELD_SIZE,7*FIELD_SIZE,FIELD_SIZE,FIELD_SIZE);
                 g.fillRect((i+1)*FIELD_SIZE,7*FIELD_SIZE,FIELD_SIZE,FIELD_SIZE);
             }
+        BufferedImage image1 = whitePawn;
+        BufferedImage image = blackPawn;
+
+        for(int i=0 ; i<SCREEN_WIDTH/FIELD_SIZE; i++){
+            g.drawImage(image1, i*FIELD_SIZE, 6*FIELD_SIZE, FIELD_SIZE, FIELD_SIZE, null);
+            g.drawImage(image, i*FIELD_SIZE, 1*FIELD_SIZE, FIELD_SIZE, FIELD_SIZE, null);
+        }
 
     }
+    public void uploadImages(){
+        try {
+             whitePawn = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/pieces/Pawn.png")));
+             blackPawn = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/pieces/Bpawn.png")));
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
 }
