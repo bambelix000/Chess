@@ -2,7 +2,8 @@ package game;
 
 import javax.swing.*;
 
-public class GameFrame extends JFrame {
+
+public class GameFrame extends JFrame  {
 
     GameFrame(){
         this.add(new GamePanel());
@@ -13,4 +14,6 @@ public class GameFrame extends JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
+
+
 }

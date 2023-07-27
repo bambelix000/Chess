@@ -22,6 +22,7 @@ public class GamePanel extends Piece implements ActionListener {
     }
     public void startGame() {
         uploadPieces();
+
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
