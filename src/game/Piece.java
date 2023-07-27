@@ -1,38 +1,33 @@
 package game;
 
-import javax.imageio.ImageIO;
+import game.pieces.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
+
 
 public class Piece extends JPanel {
     int SCREEN_WIDTH = GamePanel.SCREEN_WIDTH;
     int FIELD_SIZE = GamePanel.FIELD_SIZE;
-    public BufferedImage whitePawn, blackPawn, whiteRook, blackRook,
-                        whiteKnight, blackKnight, whiteBishop, blackBishop,
-                        whiteQueen, blackQueen, whiteKing, blackKing;
 
-    public void uploadPieces(){
-        try {
-            whitePawn = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/pieces/Pawn.png")));
-            whiteRook = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/pieces/Rook.png")));
-            whiteKnight = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/pieces/Knight.png")));
-            whiteBishop = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/pieces/Bishop.png")));
-            whiteQueen = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/pieces/Queen.png")));
-            whiteKing = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/pieces/King.png")));
+    King king = new King();
+    Queen queen = new Queen();
+    Rook rook = new Rook();
+    Bishop bishop = new Bishop();
+    Knight knight = new Knight();
+    Pawn pawn = new Pawn();
 
-            blackPawn = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/pieces/Bpawn.png")));
-            blackRook = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/pieces/Brook.png")));
-            blackKnight = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/pieces/Bknight.png")));
-            blackBishop = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/pieces/Bbishop.png")));
-            blackQueen = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/pieces/Bqueen.png")));
-            blackKing = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/pieces/Bking.png")));
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+    public void uploadPieces() {
+            queen.uploadQueen();
+            rook.uploadRook();
+            pawn.uploadPawn();
+            knight.uploadKnight();
+            bishop.uploadBishop();
+            king.uploadKing();
     }
+
+
     public void drawBoard(Graphics g) {
         for(int i=0 ; i<SCREEN_WIDTH/FIELD_SIZE; i+=2){
 
@@ -64,20 +59,21 @@ public class Piece extends JPanel {
         }
 
     }
-    public void drawPieces(Graphics g){
-        BufferedImage pawn = whitePawn;
-        BufferedImage rook = whiteRook;
-        BufferedImage knight = whiteKnight;
-        BufferedImage bishop = whiteBishop;
-        BufferedImage queen = whiteQueen;
-        BufferedImage king = whiteKing;
 
-        BufferedImage bPawn = blackPawn;
-        BufferedImage bRook = blackRook;
-        BufferedImage bKnight = blackKnight;
-        BufferedImage bBishop = blackBishop;
-        BufferedImage bQueen = blackQueen;
-        BufferedImage bKing = blackKing;
+    public void drawPieces(Graphics g){
+        BufferedImage pawn = Pawn.whitePawn;
+        BufferedImage rook = Rook.whiteRook;
+        BufferedImage knight = Knight.whiteKnight;
+        BufferedImage bishop = Bishop.whiteBishop;
+        BufferedImage queen = Queen.whiteQueen;
+        BufferedImage king = King.whiteKing;
+
+        BufferedImage bPawn = Pawn.blackPawn;
+        BufferedImage bRook = Rook.blackRook;
+        BufferedImage bKnight = Knight.blackKnight;
+        BufferedImage bBishop = Bishop.blackBishop;
+        BufferedImage bQueen = Queen.blackQueen;
+        BufferedImage bKing = King.blackKing;
 
         for(int i=0 ; i<SCREEN_WIDTH/FIELD_SIZE; i++){
             g.drawImage(pawn, i*FIELD_SIZE, 6*FIELD_SIZE, FIELD_SIZE, FIELD_SIZE, null);
